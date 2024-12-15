@@ -15,15 +15,17 @@ export const useProperties = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const fetchProperties = async () => {
     setLoading(true);
-    const { call, controller } = getProperties("house", 2); // Ejemplo con búsqueda "house" y página 2
+    const { call, controller } = getProperties(); 
 
     try {
       const response = await call;
+      console.log("properties", response);
       setLoading(false);
-      const json = JSON.parse(
-        response.data.replace("export default JSON.parse(", "").slice(0, -1)
-      );
-      const properties: Property[] = JSON.parse(json);
+      
+    
+      const properties: Property[] = response.data;
+   
+      
       setProperties(properties);
     } catch (error) {
       if (axios.isCancel(error)) {
