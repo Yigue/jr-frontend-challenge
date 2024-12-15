@@ -7,7 +7,7 @@ import UseApiCall from "@/models/useApi.model";
 export const getProperties = (query?: string, page?: number): UseApiCall => {
   const controller = loadAbort();
   return {
-    call: axios.get<Property[]>(`https://fake-api-listings.vercel.app/properties`, {
+    call: axios.get(`/properties`, {
       params: {
         search: query ,
         page: page ,

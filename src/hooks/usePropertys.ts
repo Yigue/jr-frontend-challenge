@@ -19,11 +19,12 @@ export const useProperties = () => {
 
     try {
       const response = await call;
-      console.log("properties", response);
       setLoading(false);
-      
-    
-      const properties: Property[] = response.data;
+     
+      const json = JSON.parse(
+        response.data.replace("export default JSON.parse(", "").slice(0, -1)
+      );
+      const properties: Property[] = JSON.parse(json);
    
       
       setProperties(properties);
