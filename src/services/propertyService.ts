@@ -7,7 +7,7 @@ import UseApiCall from "@/models/useApi.model";
 export const getProperties = (query?: string, page?: number): UseApiCall => {
   const controller = loadAbort();
   return {
-    call: axios.get<Property[]>(`/properties`, {
+    call: axios.get<Property[]>(`https://fake-api-listings.vercel.app/properties`, {
       params: {
         search: query || "",
         page: page || 1,
@@ -19,7 +19,7 @@ export const getProperties = (query?: string, page?: number): UseApiCall => {
 };
 export const getPropertyById = async (id: string): Promise<Property> => {
   const response = await axios.get<ApiResponse<Property>>(
-    `https://fake-api-listings.vercel.app/api-docs/properties/${id}`
+    `https://fake-api-listings.vercel.app/properties/${id}`
   );
   return response.data;
 };
