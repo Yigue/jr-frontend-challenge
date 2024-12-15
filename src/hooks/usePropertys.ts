@@ -18,12 +18,17 @@ export const useProperties = () => {
     const { call, controller } = getProperties("house", 2); // Ejemplo con búsqueda "house" y página 2
 
     try {
-      const response = await call;
+      const response= await call;
       setLoading(false);
-      const json = JSON.parse(
-        response.data.replace("export default JSON.parse(", "").slice(0, -1)
-      );
-      const properties: Property[] = JSON.parse(json);
+      if (typeof response.data === 'string') {
+        const json = JSON.parse(
+          response.data.replace("export default JSON.parse(", "").slice(0, -1)
+        );
+        const properties: Property[] = JSON.parse(json);
+        setProperties(properties);
+      } else {
+        console.error("Invalid response data type");
+      }
       setProperties(properties);
     } catch (error) {
       if (axios.isCancel(error)) {
@@ -44,7 +49,12 @@ export const useProperties = () => {
     setLoading(true);
     try {
       const response = await getProperties(id);
-      return response.properties[0];
+      const data = await response.call;
+      if (Array.isArray(data)) {
+        return data[0];
+      } else {
+        console.error("Invalid response data type");
+      }
     } catch (error) {
       console.log("error", error);
     } finally {
@@ -58,7 +68,7 @@ export const useProperties = () => {
       const { call } = await newProperty(property);
       const response = await call;
 
-      setProperties((prev) => [...prev, response.data]);
+      setProperties((prev) => [...prev, response.data! as Property]);
     } catch (error) {
       console.log("error", error);
     } finally {

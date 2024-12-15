@@ -5,7 +5,7 @@ import { loadAbort } from "@/utils/loadAbort.utils";
 import UseApiCall from "@/models/useApi.model";
 
 
-export const getProperties = (query?: string, page?: number):  UseApiCall<Property[]> => {
+export const getProperties = (query?: string, page?: number):  UseApiCall<Property[]|string> => {
   const controller = loadAbort();
   return {
     call: axios.get<Property[]>(`/properties`, { params: {

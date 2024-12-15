@@ -2,7 +2,6 @@ export * from './Footer/Footer';
 export { default as Formulario } from './Formulario/Formulario';
 export { default as Maps } from './Maps/Maps';
 export * from './Navbar/Navbar';
-export * from './Property/PropertyBadge';
 export * from './Property/PropertyCard';
 export * from './Property/PropertyDetail';
 export * from './Property/PropertyInfo';
