@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-export default interface UseApiCall<T> {
-  call: Promise<AxiosResponse<T>>,
+export default interface UseApiCall {
+  call: Promise<AxiosResponse>,
   controller: AbortController
 }

@@ -13,6 +13,7 @@ function Home() {
       <LoadPage />
     );
 
+
   const handlePropertyClick = (property: Property) => {
     setSelectedProperty(property);
   };
